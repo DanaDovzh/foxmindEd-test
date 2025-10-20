@@ -1,5 +1,5 @@
 import { DatePipe } from '@angular/common';
-import { AfterViewInit, Component, inject, OnDestroy, OnInit, TemplateRef, ViewChild, ViewContainerRef } from '@angular/core';
+import { AfterViewInit, Component, inject, OnDestroy, TemplateRef, ViewChild, ViewContainerRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { Incident } from '../../models/incident.model';
 import { FilterService } from '../../services/filter.service';
@@ -12,9 +12,10 @@ declare let L: any;
   imports: [DatePipe, IncidentCategoryPipe],
   templateUrl: './incidents-map.component.html',
   styleUrls: ['./incidents-map.component.scss'],
-  standalone: true
+  standalone: true,
+  providers: [IncidentCategoryPipe],
 })
-export class IncidentsMapComponent implements OnInit, AfterViewInit, OnDestroy {
+export class IncidentsMapComponent implements AfterViewInit, OnDestroy {
   viewContainerRef = inject(ViewContainerRef);
   router = inject(Router);
   markerCluster!: any;
@@ -34,11 +35,8 @@ export class IncidentsMapComponent implements OnInit, AfterViewInit, OnDestroy {
 
   @ViewChild('popupTemplate') popupTemplate!: TemplateRef<unknown>;
 
-  constructor(private _filterService: FilterService, private _incidentsService: IncidentsService) { }
+  constructor(private _filterService: FilterService, private _incidentsService: IncidentsService, private _categoryPipe: IncidentCategoryPipe) { }
 
-  ngOnInit() {
-    console.log(1)
-  }
 
 async ngAfterViewInit() {
   if (!this.map) {
@@ -88,7 +86,7 @@ async ngAfterViewInit() {
         html: `
         <div style="display: flex; flex-direction: column; align-items: center;">
           <img src="assets/leaflet/marker-icon.png" style="width: 25px; height: 41px;" />
-          <span style="font-size: 12px; color: black; margin-top: 4px;">${incident.category}</span>
+          <span style="font-size: 12px; color: black; margin-top: 4px;">${this._categoryPipe.transform(incident.category)}</span>
         </div>
       `,
         iconSize: [25, 55],
@@ -115,8 +113,8 @@ async ngAfterViewInit() {
 
   ngOnDestroy() {
   if (this.map) {
-    this.map.off(); // прибирає слухачі подій
-    this.map.remove(); // ⛔ якщо прибрати — зламає при поверненні
+    this.map.off();
+    this.map.remove();
   }
 }
 }

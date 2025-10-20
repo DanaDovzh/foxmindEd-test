@@ -37,6 +37,14 @@ export class IncidentsFiltersComponent implements OnInit {
         to: new FormControl<Date | null>(null)
       }),
     });
+
+    if (Object.keys(this._filterService.currentFilters).length !== 0) {
+      this.incidentsFilterForm.patchValue(this._filterService.currentFilters);
+      this.incidentsFilterForm.markAllAsDirty();
+      this.incidentsFilterForm.markAsTouched();
+      this.incidentsFilterForm.updateValueAndValidity();
+    }
+
   }
 
   getViewMode() {
