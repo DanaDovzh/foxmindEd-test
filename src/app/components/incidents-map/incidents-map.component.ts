@@ -2,11 +2,13 @@ import { DatePipe } from '@angular/common';
 import { AfterViewInit, Component, inject, OnInit, TemplateRef, ViewChild, ViewContainerRef } from '@angular/core';
 import { Router } from '@angular/router';
 import * as L from 'leaflet';
-import 'leaflet.markercluster';
 import { Incident } from '../../models/incident.model';
 import { FilterService } from '../../services/filter.service';
 import { IncidentsService } from '../../services/incidents.service';
 import { IncidentCategoryPipe } from '../../shared/pipes/incident-category.pipe';
+
+import 'leaflet';
+import 'leaflet.markercluster';
 (window as any).L = L;
 @Component({
   selector: 'app-incidents-map',
@@ -18,7 +20,7 @@ import { IncidentCategoryPipe } from '../../shared/pipes/incident-category.pipe'
 export class IncidentsMapComponent implements OnInit, AfterViewInit {
   viewContainerRef = inject(ViewContainerRef);
   router = inject(Router);
-  markerCluster!: L.MarkerClusterGroup;
+  markerCluster!: any;
   incidentsData: Incident[] = [];
   private map!: L.Map
   options: L.MapOptions = {
