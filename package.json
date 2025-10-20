@@ -8,7 +8,8 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "lint": "ng lint",
-    "github-build": "ng build --configuration production --base-href 'https://DanaDovzh.github.io/foxmindEd-test/'"
+    "github-build": "ng build --configuration production --base-href 'https://DanaDovzh.github.io/foxmindEd-test/'",
+    "github-deploy": "npx angular-cli-ghpages --dir=dist/foxmindEd-test/browser --no-silent"
   },
   "prettier": {
     "printWidth": 100,

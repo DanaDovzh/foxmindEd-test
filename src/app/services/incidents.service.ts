@@ -11,7 +11,7 @@ import { Incident, IncidentFilters } from '../models/incident.model';
 
 @Injectable({ providedIn: 'root' })
 export class IncidentsService {
-  private readonly dataUrl = '/assets/incidents.json';
+  private readonly dataUrl = 'assets/incidents.json';
 
   http = inject(HttpClient);
 
