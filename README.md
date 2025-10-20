@@ -13,3 +13,8 @@ npm i && npm run start
 ```bash
 npm run lint
 ```
+
+## 🔗 Demo
+
+[Перейти до онлайн-версії сайту](https://danadovzh.github.io/foxmindEd-test/)
+
