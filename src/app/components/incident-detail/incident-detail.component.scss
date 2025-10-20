@@ -1,0 +1,13 @@
+.incident {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  &-card {
+    max-width: 550px;
+  }
+}
+
+.incident-header {
+  display: flex;
+  align-self: flex-start;
+}

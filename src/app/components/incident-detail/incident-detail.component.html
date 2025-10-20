@@ -1,0 +1,23 @@
+<div class="incident">
+  <header class="incident-header">
+    <button mat-button (click)="goBack()">
+      <mat-icon>arrow_back</mat-icon>
+      Повернутися назад
+    </button>
+  </header>
+  <mat-card class="incident-card" appearance="outlined">
+    <mat-card-header>
+      <mat-card-title>{{ currentIncident.title }}</mat-card-title>
+      <mat-card-subtitle>{{ currentIncident.category | categoryLabel }}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <div id="mapIncident" style="height: 400px; width: 400px;"></div>
+
+      <div>Дата інциденту: {{ currentIncident.createdAt | date:'medium' }}</div>
+      <div class="description">
+        {{ currentIncident.description }}
+      </div>
+    </mat-card-content>
+  </mat-card>
+
+</div>

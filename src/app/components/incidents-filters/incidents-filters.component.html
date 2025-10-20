@@ -1,0 +1,48 @@
+<div class="wrapper-filters">
+  <form [formGroup]="incidentsFilterForm" class="filters-form">
+    <div class="form-block">
+      <mat-form-field>
+        <mat-label>Категорії</mat-label>
+        <mat-select formControlName="categories" multiple>
+          @for (category of categoryList; track category) {
+          <mat-option [value]="category.value">{{category.label}}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div class="form-block">
+      <mat-form-field>
+        <mat-label>Період</mat-label>
+        <mat-date-range-input [rangePicker]="picker" formGroupName="dateRange">
+          <input matStartDate placeholder="від" formControlName="from">
+          <input matEndDate placeholder="до" formControlName="to">
+        </mat-date-range-input>
+        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-date-range-picker #picker></mat-date-range-picker>
+      </mat-form-field>
+    </div>
+
+    <div class="form-block">
+      <mat-label>Тяжкість</mat-label>
+      <mat-radio-group formControlName="priority" aria-label="Select an option">
+        <mat-radio-button value="1">1</mat-radio-button>
+        <mat-radio-button value="2">2</mat-radio-button>
+        <mat-radio-button value="3">3</mat-radio-button>
+        <mat-radio-button value="4">4</mat-radio-button>
+        <mat-radio-button value="5">5</mat-radio-button>
+      </mat-radio-group>
+    </div>
+  </form>
+  <div class="action-footer">
+    <div class="btns">
+      <button matButton="elevated" (click)="resetFilters()">Скинути</button>
+      <button matButton="filled" (click)="applyFilters()" [disabled]="incidentsFilterForm.pristine">Застосувати</button>
+    </div>
+
+    <mat-button-toggle-group name="fontStyle" aria-label="Font Style" [value]="viewMode" (change)="changeViewMode($event.value)">
+      <mat-button-toggle value="list">Список</mat-button-toggle>
+      <mat-button-toggle value="map">Карта</mat-button-toggle>
+    </mat-button-toggle-group>
+  </div>
+</div>

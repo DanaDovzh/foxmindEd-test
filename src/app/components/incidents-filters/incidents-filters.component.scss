@@ -1,0 +1,30 @@
+.wrapper-filters {
+  padding: 20px;
+  border: 1px solid #000;
+  border-radius: 12px;
+  width: 100%;
+}
+
+.filters-form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+
+  .form-block {
+    width: 100%;
+    &:nth-child(3) {
+      grid-column: span 2;
+    }
+  }
+
+}
+
+.action-footer {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+
+  .btns {
+    display: flex;
+    gap: 5px;
+  }
+}

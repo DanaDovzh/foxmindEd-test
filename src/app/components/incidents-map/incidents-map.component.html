@@ -1,0 +1,13 @@
+<div id="map"></div>
+
+
+<ng-template #popupTemplate let-incident>
+  <div class="incident-popup">
+    <p class="popup-title">{{ incident.title }}</p>
+    <p class="parameter"><span class="parameter-name">Категорія:</span> {{ incident.category | categoryLabel }}</p>
+    <p class="parameter"><span class="parameter-name">Важкість:</span> {{ incident.severity }}</p>
+    <p class="parameter"><span class="parameter-name">Дата:</span> {{ incident.createdAt | date:'medium' }}</p>
+
+    <button (click)="openIncident(incident.id)">Деталі</button>
+  </div>
+</ng-template>
