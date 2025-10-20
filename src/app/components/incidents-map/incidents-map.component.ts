@@ -5,7 +5,7 @@ import { Incident } from '../../models/incident.model';
 import { FilterService } from '../../services/filter.service';
 import { IncidentsService } from '../../services/incidents.service';
 import { IncidentCategoryPipe } from '../../shared/pipes/incident-category.pipe';
-declare const L: any;
+import { L } from '../../shared/leaflet-init';
 @Component({
   selector: 'app-incidents-map',
   imports: [DatePipe, IncidentCategoryPipe],
