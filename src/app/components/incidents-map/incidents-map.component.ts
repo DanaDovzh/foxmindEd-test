@@ -79,7 +79,7 @@ export class IncidentsMapComponent implements OnInit, AfterViewInit {
     if (this.markerCluster) {
       this.map.removeLayer(this.markerCluster);
     }
-    this.markerCluster = new L.MarkerClusterGroup();
+    this.markerCluster = L.markerClusterGroup();
     this.incidentsData.forEach(incident => {
       const customIcon = L.divIcon({
         html: `
