@@ -90,6 +90,9 @@ export class IncidentDetailComponent implements OnInit, AfterViewInit {
   }
 
   goBack() {
-    this._location.back();
+   window.history.back();
+setTimeout(() => {
+  // window.location.reload();
+}, 100);
   }
 }

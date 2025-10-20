@@ -1,11 +1,12 @@
 import { DatePipe } from '@angular/common';
-import { AfterViewInit, Component, inject, OnInit, TemplateRef, ViewChild, ViewContainerRef } from '@angular/core';
+import { AfterViewInit, Component, inject, OnDestroy, OnInit, TemplateRef, ViewChild, ViewContainerRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { Incident } from '../../models/incident.model';
 import { FilterService } from '../../services/filter.service';
 import { IncidentsService } from '../../services/incidents.service';
 import { IncidentCategoryPipe } from '../../shared/pipes/incident-category.pipe';
-import { L } from '../../shared/leaflet-init';
+
+declare let L: any;
 @Component({
   selector: 'app-incidents-map',
   imports: [DatePipe, IncidentCategoryPipe],
@@ -13,7 +14,7 @@ import { L } from '../../shared/leaflet-init';
   styleUrls: ['./incidents-map.component.scss'],
   standalone: true
 })
-export class IncidentsMapComponent implements OnInit, AfterViewInit {
+export class IncidentsMapComponent implements OnInit, AfterViewInit, OnDestroy {
   viewContainerRef = inject(ViewContainerRef);
   router = inject(Router);
   markerCluster!: any;
@@ -36,16 +37,20 @@ export class IncidentsMapComponent implements OnInit, AfterViewInit {
   constructor(private _filterService: FilterService, private _incidentsService: IncidentsService) { }
 
   ngOnInit() {
-    this.subscribeToFilterChanges();
+    console.log(1)
   }
 
-  ngAfterViewInit() {
+async ngAfterViewInit() {
+  if (!this.map) {
+    if (!(L as any).markerClusterGroup) {
+    await import('leaflet.markercluster');
+  }
     this.initMap();
-
-    setTimeout(() => {
-      this.map.invalidateSize();
-    }, 0);
+    this.subscribeToFilterChanges();
+  } else {
+    this.map.invalidateSize();
   }
+}
 
   getIncidents() {
     this._incidentsService.loadData(this._filterService.currentFilters).subscribe(data => {
@@ -107,4 +112,11 @@ export class IncidentsMapComponent implements OnInit, AfterViewInit {
   openIncident(id: number) {
     this.router.navigate(['/incident', id]);
   }
+
+  ngOnDestroy() {
+  if (this.map) {
+    this.map.off(); // прибирає слухачі подій
+    this.map.remove(); // ⛔ якщо прибрати — зламає при поверненні
+  }
+}
 }
