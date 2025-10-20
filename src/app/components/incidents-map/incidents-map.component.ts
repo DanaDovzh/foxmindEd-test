@@ -1,12 +1,11 @@
 import { DatePipe } from '@angular/common';
 import { AfterViewInit, Component, inject, OnInit, TemplateRef, ViewChild, ViewContainerRef } from '@angular/core';
 import { Router } from '@angular/router';
-import * as L from 'leaflet';
 import { Incident } from '../../models/incident.model';
 import { FilterService } from '../../services/filter.service';
 import { IncidentsService } from '../../services/incidents.service';
 import { IncidentCategoryPipe } from '../../shared/pipes/incident-category.pipe';
-(window as any).L = L;
+declare const L: any;
 @Component({
   selector: 'app-incidents-map',
   imports: [DatePipe, IncidentCategoryPipe],
