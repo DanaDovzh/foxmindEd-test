@@ -6,9 +6,6 @@ import { Incident } from '../../models/incident.model';
 import { FilterService } from '../../services/filter.service';
 import { IncidentsService } from '../../services/incidents.service';
 import { IncidentCategoryPipe } from '../../shared/pipes/incident-category.pipe';
-
-import 'leaflet';
-import 'leaflet.markercluster';
 (window as any).L = L;
 @Component({
   selector: 'app-incidents-map',
@@ -81,7 +78,7 @@ export class IncidentsMapComponent implements OnInit, AfterViewInit {
     if (this.markerCluster) {
       this.map.removeLayer(this.markerCluster);
     }
-    this.markerCluster = L.markerClusterGroup();
+    this.markerCluster = (window as any).L.markerClusterGroup();
     this.incidentsData.forEach(incident => {
       const customIcon = L.divIcon({
         html: `
