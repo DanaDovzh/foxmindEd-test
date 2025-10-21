@@ -1,0 +1,1 @@
+import{J as i,e as r}from"./chunk-DRVSLC3Q.js";var s=class t{filtersSubject=new r({});filters$=this.filtersSubject.asObservable();setFilters(e){this.filtersSubject.next(e)}get currentFilters(){return this.filtersSubject.getValue()}static \u0275fac=function(n){return new(n||t)};static \u0275prov=i({token:t,factory:t.\u0275fac,providedIn:"root"})};export{s as a};
