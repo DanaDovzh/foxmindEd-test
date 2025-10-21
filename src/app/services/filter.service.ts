@@ -3,15 +3,9 @@ import { BehaviorSubject } from 'rxjs';
 import { IncidentFilters } from '../models/incident.model';
 
 
-const defaultFilters: IncidentFilters = {
-  categories: [],
-  priority: undefined,
-  dateRange: { from: null, to: null }
-};
-
 @Injectable({ providedIn: 'root' })
 export class FilterService {
-  private filtersSubject = new BehaviorSubject<IncidentFilters>(defaultFilters);
+  private filtersSubject = new BehaviorSubject<IncidentFilters>({});
   filters$ = this.filtersSubject.asObservable();
 
   setFilters(newFilters: IncidentFilters) {
